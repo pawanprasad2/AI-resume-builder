@@ -84,3 +84,10 @@ module.exports.logoutUser=async (req,res)=>{
   res.clearCookie("token")
   res.status(200).json({message:"user logged out successfully"})
 }
+
+
+module.exports.getMeUser= async(req,res)=>{
+  const user= await userModel.findById(req.user.id)
+
+  res.status(200).json({message:"user details fetch successfully",user})
+}
