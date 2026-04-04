@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router";
 
 export default function Register() {
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[#b5b5b5a7] flex items-center justify-center px-4">
 
       <div className="w-full max-w-md">
 
@@ -49,27 +50,12 @@ export default function Register() {
 
           </form>
 
-          {/* Divider */}
-          <div className="flex items-center my-6">
-            <div className="flex-1 h-px bg-gray-200"></div>
-            <span className="px-3 text-xs text-gray-400">OR</span>
-            <div className="flex-1 h-px bg-gray-200"></div>
-          </div>
-
-          <button className="w-full flex items-center justify-center gap-2 border border-gray-300 py-2 rounded-md text-sm hover:bg-gray-50 transition">
-            <img
-              src="https://www.svgrepo.com/show/475656/google-color.svg"
-              alt="google"
-              className="w-4 h-4"
-            />
-            Continue with Google
-          </button>
 
           <p className="text-xs text-center text-gray-500 mt-6">
             Already have an account?{" "}
-            <span className="text-black font-medium cursor-pointer hover:underline">
+          <Link to="/login">  <span className="text-black font-medium cursor-pointer hover:underline">
               Log in
-            </span>
+            </span></Link>
           </p>
 
         </div>
