@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router";
+import { useAuth } from "../auth/hooks/useAuth";
 
 export default function Login() {
+const {loading,handleLogin}= useAuth()
+const[email,setEmail]=useState("")
+const[password,setPassword]=useState("")
+
+
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    handleLogin({email,password})
+  }
+
+ if (loading) {
+  return (
+    <main className="flex justify-center items-center h-screen">
+      <h1 className="text-2xl text-black">Loading...</h1>
+    </main>
+  );
+}
   return (
     <div className="min-h-screen bg-[#b5b5b5a7] flex items-center justify-center px-4">
 
@@ -24,20 +42,22 @@ export default function Login() {
             Sign in to your account
           </h2>
 
-          <form className="space-y-4">
+          <form  onSubmit={handleSubmit} className="space-y-4">
 
             <div>
               <input
                 type="email"
                 placeholder="Email"
+                onChange={(e)=>{setEmail(e.target.value)}}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-black/80 transition"
               />
-            </div>
+            </div>  
 
             <div>
               <input
                 type="password"
                 placeholder="Password"
+                onChange={(e)=>{setPassword(e.target.value)}}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-black/80 transition"
               />
             </div>
