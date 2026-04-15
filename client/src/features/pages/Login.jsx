@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
-import { useAuth } from "../auth/hooks/useAuth";
+import { Link,useNavigate } from "react-router";
+import { useAuth} from "../auth/hooks/useAuth";
 
 export default function Login() {
+
 const {loading,handleLogin}= useAuth()
 const[email,setEmail]=useState("")
 const[password,setPassword]=useState("")
+const navigate= useNavigate()
 
 
-  const handleSubmit=(e)=>{
+  const handleSubmit= async(e)=>{
     e.preventDefault()
-    handleLogin({email,password})
+    await  handleLogin({email,password})
+    navigate("/")
+    
   }
 
  if (loading) {

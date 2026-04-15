@@ -8,30 +8,59 @@ export const useAuth = () => {
 
   const handleLogin = async ({ email, password }) => {
     setLoading(true);
-    const data = await login({ email, password });
-    setUser(data.user);
-    setLoading(false);
+    try {
+      const data = await login({ email, password });
+      setUser(data.user);
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleRegister = async ({ email, password, username }) => {
-    setLoading(true)
-    const data = await register({ email, password, username });
-    setUser(data.user);
-    setLoading(false);
+    setLoading(true);
+
+
+    try {
+      const data = await register({ email, password, username });
+      
+      setUser(data.user);
+    } catch (error) {
+      
+    }finally{
+
+      setLoading(false);
+    }
   };
 
   const handleLogout = async () => {
     setLoading(true);
-    const data = await logout();
-    setUser(null);
-    setLoading(false);
+
+    try {
+      
+      const data = await logout();
+      setUser(null);
+    } catch (error) {
+      
+    }finally{
+
+      setLoading(false);
+    }
   };
 
   const handleProfile = async () => {
     setLoading(true);
-    const data = await profile();
-    setUser(data.profile);
-    setLoading(false);
+
+    try {
+      const data = await profile();
+      
+      setUser(data.profile);
+    } catch (error) {
+      
+    }finally{
+
+      setLoading(false);
+    }
   };
 
   return {

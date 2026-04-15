@@ -27,7 +27,7 @@ export async function login({email,password}){
 
     return response.data
    } catch (error) {
-    console.log(error)
+    console.log(error)  
    }
 }
 
@@ -53,3 +53,5 @@ export async function profile(){
         console.log(error)
     }
 }
+
+
