@@ -1,21 +1,32 @@
-import {  createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { profile } from "./features/services/auth.api";
+export const AuthContext = createContext();
 
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const getAndSetUser = async () => {
+        try {
+            const data = await profile();
+            setUser(data.user);
+            
+        } catch (error) {
+      setUser(null)
+    console.error(error)
+            
+        }finally{
 
-export const AuthContext = createContext()
+            setLoading(false);
+        }
+    };
+    getAndSetUser();
+  }, []);
 
-
-export const  AuthProvider=({children})=>{
-
-    const [user,setUser]= useState(null)
-    const [loading,setLoading]=useState(false)
-
-
-    return(
-        <AuthContext.Provider value={{user,setUser,loading,setLoading}}>
-        {children}
-        </AuthContext.Provider>
-    )
-
-
-}
+  return (
+    <AuthContext.Provider value={{ user, setUser, loading, setLoading }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
