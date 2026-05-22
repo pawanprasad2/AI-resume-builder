@@ -99,3 +99,29 @@ const interviewReportSchema = z.object({
       "The title of the job for which the interview report is generated",
     ),
 });
+
+
+async function generateInterviewReport({resume,selfDescription,jobDescription}){
+
+  const prompt=`Generate an interview report for a candidate with the following details:
+  
+  Resume:${resume}
+  self Description:${selfDescription}
+  job Description:${jobDescription}
+  
+  `
+
+
+  const response= await ai.models.generateContent({
+    model:"gemini-3-flash-preview",
+    contents:prompt,
+    config:{
+      responseMimeType:"application/json",
+      responseSchema:zodToJsonSchema(interviewReportSchema),
+    }
+  })
+  return JSON.parse(response.text)
+}
+
+
+module.exports={generateInterviewReport}
